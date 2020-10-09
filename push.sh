@@ -1,3 +1,3 @@
 git add .
-git commit -m "init"
+git commit -m "refine dir"
 git push
