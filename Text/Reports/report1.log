@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.7)  11 OCT 2020 12:21
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.7)  11 OCT 2020 12:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -106,7 +106,12 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 21.
 File: lishaogang.jpg Graphic file (type bmp)
 <lishaogang.jpg>
- [1
+
+Overfull \hbox (30.31157pt too wide) in paragraph at lines 21--30
+ [] 
+ []
+
+[1
 
 ] (./report1.aux) ) 
 Here is how much of TeX's memory you used:
