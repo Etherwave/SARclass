@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.7)  11 OCT 2020 12:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.9)  11 OCT 2020 15:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -6,63 +6,51 @@ entering extended mode
 (./report1.tex
 LaTeX2e <2020-02-02> patch level 5
 L3 programming layer <2020-03-06>
-(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/base/artic
-le.cls
+(h:/texlive/texlive/2020/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
-
-(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/base/size1
-0.clo
+(h:/texlive/texlive/2020/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
 )
-\c@part=\count163
-\c@section=\count164
-\c@subsection=\count165
-\c@subsubsection=\count166
-\c@paragraph=\count167
-\c@subparagraph=\count168
-\c@figure=\count169
-\c@table=\count170
+\c@part=\count167
+\c@section=\count168
+\c@subsection=\count169
+\c@subsubsection=\count170
+\c@paragraph=\count171
+\c@subparagraph=\count172
+\c@figure=\count173
+\c@table=\count174
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
 \bibindent=\dimen134
 )
-(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/graphics/g
-raphicx.sty
+(h:/texlive/texlive/2020/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
 
-(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/graphics/k
-eyval.sty
+(h:/texlive/texlive/2020/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks15
 )
-(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/graphics/g
-raphics.sty
+(h:/texlive/texlive/2020/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
 
-(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/graphics/t
-rig.sty
+(h:/texlive/texlive/2020/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
-(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/graphics-c
-fg/graphics.cfg
+(h:/texlive/texlive/2020/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: xetex.def on input line 105.
+Package graphics Info: Driver file: pdftex.def on input line 105.
 
-(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/graphics-d
-ef/xetex.def
-File: xetex.def 2017/06/24 v5.0h Graphics/color driver for xetex
+(h:/texlive/texlive/2020/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen135
 \Gin@req@width=\dimen136
 )
-(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/l3backend/
-l3backend-xdvipdfmx.def
-File: l3backend-xdvipdfmx.def 2020-03-12 L3 backend support: xdvipdfmx
-\g__graphics_track_int=\count171
+(h:/texlive/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count175
 \l__pdf_internal_box=\box45
-\g__pdf_backend_object_int=\count172
-\g__pdf_backend_annotation_int=\count173
 )
 
 LaTeX Warning: Unused global option(s):
@@ -80,20 +68,34 @@ LaTeX Font Info:    ... okay on input line 13.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 13.
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 1
-3.
-
-(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/base/ts1cm
-r.fd
-File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
 LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
+
+(h:/texlive/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count176
+\scratchdimen=\dimen137
+\scratchbox=\box46
+\nofMPsegments=\count177
+\nofMParguments=\count178
+\everyMPshowfont=\toks16
+\MPscratchCnt=\count179
+\MPscratchDim=\dimen138
+\MPnumerator=\count180
+\makeMPintoPDFobject=\count181
+\everyMPtoPDFconversion=\toks17
+) (h:/texlive/texlive/2020/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(h:/texlive/texlive/2020/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 15.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -104,23 +106,36 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 21.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 21.
-File: lishaogang.jpg Graphic file (type bmp)
-<lishaogang.jpg>
+<lishaogang.jpg, id=1, 1939.245pt x 2585.66pt>
+File: lishaogang.jpg Graphic file (type jpg)
+<use lishaogang.jpg>
+Package pdftex.def Info: lishaogang.jpg  used on input line 24.
+(pdftex.def)             Requested size: 51.19148pt x 68.25531pt.
 
-Overfull \hbox (30.31157pt too wide) in paragraph at lines 21--30
+Overfull \hbox (30.28943pt too wide) in paragraph at lines 21--31
  [] 
  []
 
 [1
 
-] (./report1.aux) ) 
+{h:/texlive/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./lisha
+ogang.jpg>] (./report1.aux) ) 
 Here is how much of TeX's memory you used:
- 829 strings out of 479418
- 13969 string characters out of 5874465
- 252406 words of memory out of 5000000
- 18391 multiletter control sequences out of 15000+600000
- 535098 words of font info for 36 fonts, out of 8000000 for 9000
- 1348 hyphenation exceptions out of 8191
- 30i,8n,25p,184b,324s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 1157 strings out of 480608
+ 17111 string characters out of 5903608
+ 253411 words of memory out of 5000000
+ 17087 multiletter control sequences out of 15000+600000
+ 535373 words of font info for 34 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 30i,11n,25p,184b,345s stack positions out of 5000i,500n,10000p,200000b,80000s
+<h:/texlive/texlive/2020/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr10.pfb><h:/texlive/texlive/2020/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr12.pfb><h:/texlive/texlive/2020/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr17.pfb>
+Output written on report1.pdf (1 page, 757967 bytes).
+PDF statistics:
+ 21 PDF objects out of 1000 (max. 8388607)
+ 13 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
-Output written on report1.pdf (1 page).
