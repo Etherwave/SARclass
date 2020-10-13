@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.9)  12 OCT 2020 22:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.9)  13 OCT 2020 08:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"report1 - 副本.tex"
-(./report1 - 副本.tex
+**"report1 - Aimee.tex"
+(./report1 - Aimee.tex
 LaTeX2e <2020-02-02> patch level 5
 L3 programming layer <2020-03-06>
 (h:/texlive/texlive/2020/texmf-dist/tex/latex/base/article.cls
@@ -104,8 +104,8 @@ File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
 LaTeX Warning: Unused global option(s):
     [24pt].
 
-(./report1 - 副本.aux)
-\openout1 = `"report1 - 副本.aux"'.
+(./report1 - Aimee.aux)
+\openout1 = `"report1 - Aimee.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
 LaTeX Font Info:    ... okay on input line 21.
@@ -198,20 +198,20 @@ Overfull \hbox (109.80621pt too wide) in paragraph at lines 31--45
 
 {h:/texlive/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./SAR.j
 pg> <./lishaogang.jpg> <./Wangyuan.jpg> <./Ruanhengyu.jpg> <./Aimee.jpg>]
-(./report1 - 副本.aux) ) 
+(./report1 - Aimee.aux) ) 
 Here is how much of TeX's memory you used:
  1786 strings out of 480608
- 24980 string characters out of 5903608
- 267246 words of memory out of 5000000
+ 24970 string characters out of 5903608
+ 267243 words of memory out of 5000000
  17689 multiletter control sequences out of 15000+600000
  535988 words of font info for 36 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 32i,18n,37p,326b,345s stack positions out of 5000i,500n,10000p,200000b,80000s
-<h:/texlive/texlive/2020/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr10.pfb><h:/texlive/texlive/2020/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr12.pfb><h:/texlive/texlive/2020/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr17.pfb>
-Output written on "report1 - 副本.pdf" (1 page, 1525538 bytes).
+ 32i,18n,37p,325b,345s stack positions out of 5000i,500n,10000p,200000b,80000s
+<h:/texlive/texlive/2020/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr10.pfb><h:/texlive/texlive/2020/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr12.pfb><h:/texlive/texlive/2020/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr17.pfb>
+Output written on "report1 - Aimee.pdf" (1 page, 1525746 bytes).
 PDF statistics:
  25 PDF objects out of 1000 (max. 8388607)
  13 compressed objects within 1 object stream
