@@ -1,0 +1,89 @@
+What are we supposed to learn in this part?
+• Read an image
+• Use the imagematrix library
+• Plan, produce, and present EDA results
+
+Recommendations
+• EDA assumes as little as possible.
+• EDA should come after understanding the problem, and
+before starting to model the data.
+• Choose well between tables and plots; they are adequate
+for different types of information.
+• Be parsimonious, but also generous with your reader.
+• Every table and plot must be explained in your report.
+
+Assignment II
+• Implement the densities of the 𝒦 and 𝒢0 distributions for
+intensity data
+• Implement random number generators for these
+distributions
+• Illustrate them, along with the densities of the Gamma
+distribution; use with your choices of parameters:
+• Plot the densities
+• Plot histograms and densities
+• Analyze the bright image data
+• If you need help translating, use deepl.
+• Check your wording, spelling, and sentence construction
+with grammarly
+• Produce your report as an RMarkdown file that produces a
+PDF report; share only the RMarkdown file in your
+repository. 3
+
+References
+Burchell, J. & Vargas, M. (2017), The Hitchhiker’s Guide to ggplot2,
+Leanpub.
+URL: https://leanpub.com/hitchhikers_ggplot2
+Tufte, E. R. (2001), The Visual Display of Quantitative Information,
+2 edn, Graphics Press.
+Wickham, H. (2009), ggplot2: Elegant Graphics for Data Analysis,
+Springer.
+Xie, Y., Allaire, J. & Grolemund, G. (2018), R Markdown: The
+Definitive Guide, Taylor Francis Ltd.
+URL: https://www.ebook.de/de/product/33698871/yihui_
+rstudio_inc_boston_ma_usa_xie_j_j_allaire_garrett_
+grolemund_r_markdown.html
+
+在这部分中，我们应该学习什么？
+- 读一读图片
+- 使用imagematrix库
+- 计划、制作和展示EDA结果
+
+建议
+- EDA的假设尽量少。
+- EDA应该是在了解问题之后才来，并且
+在开始建立数据模型之前。
+- 在表和图之间选择好，它们足以
+为不同类型的信息。
+- 要简明扼要，但也要对读者慷慨解囊。
+- 每一个表格和情节都必须在你的报告中做出解释。
+
+作业二
+- 实现𝒦和𝒢0分布的密度。
+强度数据
+- 实施随机数生成器，用于这些
+分布
+- 将它们与伽马射线的密度一起说明。
+分布；与您选择的参数一起使用。
+- 绘制密度图
+- 绘制直方图和密度图。
+- 分析明亮的图像数据
+- 如果你需要翻译帮助，请使用 deepl。
+- 检查你的用词、拼写和句子结构。
+有语法的
+- 将您的报告制作成RMarkdown文件，并生成一个名为 "Rarkdown "的文件。
+PDF报告；只分享您的RMarkdown文件。
+储存库。3
+
+参考文献
+Burchell, J. & Vargas, M. (2017), The Hitchhiker's Guide to ggplot2,
+Leanpub。
+URL: https://leanpub.com/hitchhikers_ggplot2
+Tufte, E. R. (2001), The Visual Display of Quantitative Information,
+2版，图形出版社。
+Wickham, H. (2009), ggplot2: 数据分析的优雅图形。
+Springer.
+Xie, Y., Allaire, J. & Grolemund, G. (2018), R Markdown: The
+Definitive Guide, Taylor Francis Ltd.
+网址：https://www.ebook.de/de/product/33698871/yihui_
+rstudio_inc_boston_ma_usa_xie_j_j_allaire_garrett_。
+grolemund_r_markdown.html。

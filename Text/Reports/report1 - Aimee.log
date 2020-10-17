@@ -1,0 +1,198 @@
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.7)  14 OCT 2020 22:11
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**"report1 - Aimee.tex"
+(./report1 - Aimee.tex
+LaTeX2e <2020-02-02> patch level 5
+L3 programming layer <2020-03-06>
+(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/base/artic
+le.cls
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+
+(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/base/size1
+0.clo
+File: size10.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+)
+\c@part=\count163
+\c@section=\count164
+\c@subsection=\count165
+\c@subsubsection=\count166
+\c@paragraph=\count167
+\c@subparagraph=\count168
+\c@figure=\count169
+\c@table=\count170
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen134
+)
+(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/graphics/g
+raphicx.sty
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/graphics/k
+eyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/graphics/g
+raphics.sty
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+
+(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/graphics/t
+rig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/graphics-c
+fg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: xetex.def on input line 105.
+
+(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/graphics-d
+ef/xetex.def
+File: xetex.def 2017/06/24 v5.0h Graphics/color driver for xetex
+))
+\Gin@req@height=\dimen135
+\Gin@req@width=\dimen136
+)
+(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/graphics/c
+olor.sty
+Package: color 2019/11/23 v1.2a Standard LaTeX Color (DPC)
+
+(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/graphics-c
+fg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: xetex.def on input line 147.
+)
+(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/underscore
+/underscore.sty
+Package: underscore 2006/09/13
+LaTeX Info: Redefining \_ on input line 42.
+)
+(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/xcolor/xco
+lor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/graphics-c
+fg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: xetex.def on input line 225.
+
+(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/colortbl/c
+olortbl.sty
+Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
+
+(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/tools/arra
+y.sty
+Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
+\col@sep=\dimen137
+\ar@mcellbox=\box45
+\extrarowheight=\dimen138
+\NC@list=\toks16
+\extratabsurround=\skip49
+\backup@length=\skip50
+\ar@cellbox=\box46
+)
+\everycr=\toks17
+\minrowclearance=\skip51
+)
+LaTeX Info: Redefining \color on input line 709.
+\rownum=\count171
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+)
+(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/l3backend/
+l3backend-xdvipdfmx.def
+File: l3backend-xdvipdfmx.def 2020-03-12 L3 backend support: xdvipdfmx
+\g__graphics_track_int=\count172
+\l__pdf_internal_box=\box47
+\g__pdf_backend_object_int=\count173
+\g__pdf_backend_annotation_int=\count174
+)
+
+LaTeX Warning: Unused global option(s):
+    [24pt].
+
+(./report1 - Aimee.aux)
+\openout1 = `"report1 - Aimee.aux"'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 2
+1.
+
+(d:/software/latex/texlive/install/texlive/2020/texmf-dist/tex/latex/base/ts1cm
+r.fd
+File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+File: SAR.jpg Graphic file (type bmp)
+<SAR.jpg>
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 23.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 23.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 23.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 31.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 31.
+
+Underfull \hbox (badness 1540) in paragraph at lines 34--34
+[]|\TU/lmr/m/n/10 Team Mem-
+ []
+
+File: lishaogang.jpg Graphic file (type bmp)
+<lishaogang.jpg>
+File: Wangyuan.jpg Graphic file (type bmp)
+<Wangyuan.jpg>
+File: Ruanhengyu.jpg Graphic file (type bmp)
+<Ruanhengyu.jpg>
+File: Aimee.jpg Graphic file (type bmp)
+<Aimee.jpg>
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--42
+[]|\TU/lmr/m/n/10 Accomplish
+ []
+
+
+Overfull \hbox (109.84546pt too wide) in paragraph at lines 31--45
+ [] 
+ []
+
+[1
+
+] (./report1 - Aimee.aux) ) 
+Here is how much of TeX's memory you used:
+ 1456 strings out of 479418
+ 22287 string characters out of 5874465
+ 268095 words of memory out of 5000000
+ 18989 multiletter control sequences out of 15000+600000
+ 535114 words of font info for 38 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 32i,18n,37p,325b,329s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on report1 - Aimee.pdf (1 page).
