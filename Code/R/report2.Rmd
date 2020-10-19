@@ -1,3 +1,28 @@
+---
+title: "Report2 - SAR Course Xidian University"
+author: "Li shaogang"
+date: "10/18/2020"
+header-includes: \usepackage{bm,bbm}
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(reshape2)
+require(ggplot2)
+require(ggthemes)
+theme_set(theme_minimal())
+require(GGally)
+require(ggExtra)
+```
+
+```{r load bright.Rdata}
+# Use your paths
+source("./imagematrix.R")
+load("../../Data/bright.Rdata")
+# Inspect what they are in the Environment window
+```
+
 What are we supposed to learn in this part?
 • Read an image
 • Use the imagematrix library
@@ -29,6 +54,238 @@ with grammarly
 PDF report; share only the RMarkdown file in your
 repository. 3
 
+
+
+# gamma distribution
+```{r}
+x <- seq(.1, 5, length.out=500)
+y <- gamma(x)
+ggplot(data= NULL, aes(x = x, y = y)) +
+  geom_point(color = "darkred")  #添加点
+```
+# degamma distribution
+```{r}
+x <- seq(.1, 20, length.out=500)
+y1 <- dgamma(x, shape=1, scale=2)
+y2 <- dgamma(x, shape=2, scale=2)
+y3 <- dgamma(x, shape=3, scale=2)
+y4 <- dgamma(x, shape=5, scale=1)
+y5 <- dgamma(x, shape=9, scale=0.5)
+y6 <- dgamma(x, shape=7.5, scale=1)
+y7 <- dgamma(x, shape=0.5, scale=1)
+
+SimilarityDistances <- data.frame(x, y1, y2, y3, y4, y5, y6)
+
+SimilarityDistances.melt <- melt(SimilarityDistances, 
+                                 measure.vars=2:7,
+                                 value.name = "Transformations",
+                                 variable.name = "Transformation"
+)
+
+ggplot(SimilarityDistances.melt, 
+       aes(x=x, y=Transformations,
+           color=Transformation,
+           group=Transformation
+       ))+
+  geom_line(size=3, alpha=.5)+
+  geom_line(col='black', size=.2)+
+  ylim(c(0, .5))+
+  theme_economist()
+```
+
+#K distribution
+
+
+```{r}
+x <- seq(.1, 20, length.out=500)
+
+K <- function(z, a, j, L)
+{
+  (2*j*L)*(j*L*z)^((a+L)/2-1)*besselK(2*(sqrt(j*L*z)), a-L)/(gamma(a)*gamma(L))
+}
+y1 <- K(x, 1, 2, 1)
+y3 <- K(x, 3, 2, 1)
+y8 <- K(x, 8, 2, 1)
+
+SimilarityDistances <- data.frame(x, y1, y3, y8)
+
+SimilarityDistances.melt <- melt(SimilarityDistances, 
+                                 measure.vars=2:4,
+                                 value.name = "Transformations",
+                                 variable.name = "Transformation"
+)
+
+ggplot(SimilarityDistances.melt, 
+       aes(x=x, y=Transformations,
+           color=Transformation,
+           group=Transformation
+       ))+
+  geom_line(size=3, alpha=.5)+
+  geom_line(col='black', size=.2)+
+  ylim(c(0, .5))+
+  theme_economist()
+```
+
+#G0 distribution
+
+```{r}
+x <- seq(.1, 10, length.out=500)
+
+G <- function(z, a, j, L)
+{
+  L^L*gamma(L-a)*z^(L-1)/(j^a*gamma(L)*gamma(-a)*(j+L*z)^(L-a))
+}
+y1 <- G(x, -1.5, 2, 1)
+y3 <- G(x, -3, 2, 1)
+y8 <- G(x, -8, 2, 1)
+
+SimilarityDistances <- data.frame(x, y1, y3, y8)
+
+SimilarityDistances.melt <- melt(SimilarityDistances, 
+                                 measure.vars=2:4,
+                                 value.name = "Transformations",
+                                 variable.name = "Transformation"
+)
+
+ggplot(SimilarityDistances.melt, 
+       aes(x=x, y=Transformations,
+           color=Transformation,
+           group=Transformation
+       ))+
+  geom_line(size=3, alpha=.5)+
+  geom_line(col='black', size=.2)+
+  ylim(c(0, .5))+
+  theme_economist()
+```
+
+#random number generators
+
+We are going to get the inverse func of K's Cumulative Distribution Functions, so that we can generate those random number.
+
+But it seem that we can't get the inverse func of K. So...
+
+###test example
+```{r}
+f1 <- function(x){1+0*x}
+f2 <- function(x){integrate(f1, 0, x)}
+
+
+n = 1000
+a <- runif(n, 0, 1)
+
+y <- (1:n)
+
+for(i in (1:n))
+{
+  x <- f2(a[i])$value
+  y[i]<-x
+}
+
+z <- data.frame(z = as.vector(y))
+
+```
+
+
+###test for K
+```{r}
+K <- function(z, a, j, L)
+{
+  (2*j*L)*(j*L*z)^((a+L)/2-1)*besselK(2*(sqrt(j*L*z)), a-L)/(gamma(a)*gamma(L))
+}
+f1 <- function(x){K(x, 1, 2, 1)}
+f2 <- function(x){integrate(f1, 0, x)}
+
+
+n = 1000
+a <- runif(n, 0, 20)
+
+y <- (1:n)
+
+for(i in (1:n))
+{
+  x <- f2(a[i])$value
+  y[i]<-x
+}
+
+z <- data.frame(z = as.vector(y))
+
+```
+
+#Analysis bright
+
+###The following is the simple statistic characteristic of bright.Rdata.
+```{r bright.Rdata}
+typeof(bright)
+dim(bright)
+range(bright)
+
+vector.bright <- data.frame(bright=as.vector(bright))
+summary(vector.bright)
+```
+###boxplot
+```{r}
+vector.bright <- data.frame(as.vector(bright))
+
+ggplot(vector.bright, aes(x=bright)) +
+  geom_boxplot(notch = TRUE)+
+  scale_x_log10()
+
+```
+###density of bright
+
+```{r}
+x <- bright
+
+x <- data.frame(x = as.vector(x))
+ggplot(x, aes(x=x)) +
+  geom_density(col="green", size=2)+
+  scale_x_log10()
+
+```
+###try to make sence
+
+```{r}
+plot(imagematrix(normalize(log(bright))))
+```
+
+```{r LogarithmImageTransformation}
+
+clipping <- function(img, low=0, high=1) {
+  img[img < low] <- low
+  img[img > high] <- high
+  img
+}
+
+normalize2 <- function(img) {
+  clipping(img - mean(img))
+}
+
+plot(imagematrix(normalize2(log(bright))))
+
+```
+
+
+```{r}
+normalize3 <- function(img) {
+  a <- quantile(img, 0.75)
+  clipping(img - a)
+}
+
+plot(imagematrix(normalize3(log(bright))))
+```
+
+
+```{r}
+normalize3 <- function(img) {
+  a <- quantile(img, 0.90)
+  clipping(img - a)
+}
+
+plot(imagematrix(normalize3(log(bright))))
+```
+
+
+
 References
 Burchell, J. & Vargas, M. (2017), The Hitchhiker’s Guide to ggplot2,
 Leanpub.
@@ -42,48 +299,3 @@ Definitive Guide, Taylor Francis Ltd.
 URL: https://www.ebook.de/de/product/33698871/yihui_
 rstudio_inc_boston_ma_usa_xie_j_j_allaire_garrett_
 grolemund_r_markdown.html
-
-在这部分中，我们应该学习什么？
-- 读一读图片
-- 使用imagematrix库
-- 计划、制作和展示EDA结果
-
-建议
-- EDA的假设尽量少。
-- EDA应该是在了解问题之后才来，并且
-在开始建立数据模型之前。
-- 在表和图之间选择好，它们足以
-为不同类型的信息。
-- 要简明扼要，但也要对读者慷慨解囊。
-- 每一个表格和情节都必须在你的报告中做出解释。
-
-作业二
-- 实现𝒦和𝒢0分布的密度。
-强度数据
-- 实施随机数生成器，用于这些
-分布
-- 将它们与伽马射线的密度一起说明。
-分布；与您选择的参数一起使用。
-- 绘制密度图
-- 绘制直方图和密度图。
-- 分析明亮的图像数据
-- 如果你需要翻译帮助，请使用 deepl。
-- 检查你的用词、拼写和句子结构。
-有语法的
-- 将您的报告制作成RMarkdown文件，并生成一个名为 "Rarkdown "的文件。
-PDF报告；只分享您的RMarkdown文件。
-储存库。3
-
-参考文献
-Burchell, J. & Vargas, M. (2017), The Hitchhiker's Guide to ggplot2,
-Leanpub。
-URL: https://leanpub.com/hitchhikers_ggplot2
-Tufte, E. R. (2001), The Visual Display of Quantitative Information,
-2版，图形出版社。
-Wickham, H. (2009), ggplot2: 数据分析的优雅图形。
-Springer.
-Xie, Y., Allaire, J. & Grolemund, G. (2018), R Markdown: The
-Definitive Guide, Taylor Francis Ltd.
-网址：https://www.ebook.de/de/product/33698871/yihui_
-rstudio_inc_boston_ma_usa_xie_j_j_allaire_garrett_。
-grolemund_r_markdown.html。
