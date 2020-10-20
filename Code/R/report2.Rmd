@@ -1,9 +1,9 @@
 ---
 title: "Report2 - SAR Course Xidian University"
-author: "Li shaogang"
-date: "10/18/2020"
+author: 'Lishaogang Ruanhengyu Aimee Wangyuan '
+date: "2020/10/18"
+output: pdf_document
 header-includes: \usepackage{bm,bbm}
-output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -24,39 +24,97 @@ load("../../Data/bright.Rdata")
 ```
 
 What are we supposed to learn in this part?
-• Read an image
-• Use the imagematrix library
-• Plan, produce, and present EDA results
+
+* Read an image
+* Use the imagematrix library
+* Plan, produce, and present EDA results
 
 Recommendations
-• EDA assumes as little as possible.
-• EDA should come after understanding the problem, and
-before starting to model the data.
-• Choose well between tables and plots; they are adequate
-for different types of information.
-• Be parsimonious, but also generous with your reader.
-• Every table and plot must be explained in your report.
+
+* EDA assumes as little as possible.
+* EDA should come after understanding the problem, and before starting to model the data.
+* Choose well between tables and plots; they are adequate for different types of information.
+* Be parsimonious, but also generous with your reader.
+* Every table and plot must be explained in your report.
 
 Assignment II
-• Implement the densities of the 𝒦 and 𝒢0 distributions for
-intensity data
-• Implement random number generators for these
-distributions
-• Illustrate them, along with the densities of the Gamma
-distribution; use with your choices of parameters:
-• Plot the densities
-• Plot histograms and densities
-• Analyze the bright image data
-• If you need help translating, use deepl.
-• Check your wording, spelling, and sentence construction
-with grammarly
-• Produce your report as an RMarkdown file that produces a
-PDF report; share only the RMarkdown file in your
-repository. 3
 
+* Implement the densities of the 𝒦 and 𝒢0 distributions for intensity data
+* Implement random number generators for these distributions
+* Illustrate them, along with the densities of the Gamma distribution; use with your choices of parameters:
+* Plot the densities
+* Plot histograms and densities
+* Analyze the bright image data
+* If you need help translating, use deepl.
+* Check your wording, spelling, and sentence construction with grammarly
+* Produce your report as an RMarkdown file that produces a PDF report; share only the RMarkdown file in your repository. 3
 
+# 𝒦 distribution：
+-----------------------------------------------------------------------
+```{r}
+x <- seq(.1, 20, length.out=500)
 
-# gamma distribution
+K <- function(z, a, j, L)
+{
+  (2*j*L)*(j*L*z)^((a+L)/2-1)*besselK(2*(sqrt(j*L*z)), a-L)/(gamma(a)*gamma(L))
+}
+y1 <- K(x, 1, 2, 1)
+y3 <- K(x, 8, 2, 1)
+y8 <- K(x, 20, 2, 1)
+
+SimilarityDistances <- data.frame(x, y1, y3, y8)
+
+SimilarityDistances.melt <- melt(SimilarityDistances, 
+                                 measure.vars=2:4,
+                                 value.name = "Transformations",
+                                 variable.name = "Transformation"
+)
+
+ggplot(SimilarityDistances.melt, 
+       aes(x=x, y=Transformations,
+           color=Transformation,
+           group=Transformation
+       ))+
+  geom_line(size=3, alpha=.5)+
+  geom_line(col='black', size=.2)+
+  ylim(c(0, .5))+
+  theme_economist()
+```
+
+# G0 distribution：
+-----------------------------------------------------------------
+```{r}
+x <- seq(.1, 10, length.out=500)
+
+G <- function(z, a, j, L)
+{
+  L^L*gamma(L-a)*z^(L-1)/(j^a*gamma(L)*gamma(-a)*(j+L*z)^(L-a))
+}
+y1 <- G(x, -1.5, 2, 1)
+y3 <- G(x, -3, 2, 1)
+y8 <- G(x, -16, 2, 1)
+
+SimilarityDistances <- data.frame(x, y1, y3, y8)
+
+SimilarityDistances.melt <- melt(SimilarityDistances, 
+                                 measure.vars=2:4,
+                                 value.name = "Transformations",
+                                 variable.name = "Transformation"
+)
+
+ggplot(SimilarityDistances.melt, 
+       aes(x=x, y=Transformations,
+           color=Transformation,
+           group=Transformation
+       ))+
+  geom_line(size=3, alpha=.5)+
+  geom_line(col='black', size=.2)+
+  ylim(c(0, .5))+
+  theme_economist()
+```
+
+# Gamma distribution
+-----------------------------------------------------------------
 ```{r}
 x <- seq(.1, 5, length.out=500)
 y <- gamma(x)
@@ -93,80 +151,19 @@ ggplot(SimilarityDistances.melt,
   theme_economist()
 ```
 
-#K distribution
+# Random number generators
+-----------------------------------------------------------------
 
+We don't know how to generate the random number by taking the ratio of two independent Gamma deviates.
 
-```{r}
-x <- seq(.1, 20, length.out=500)
-
-K <- function(z, a, j, L)
-{
-  (2*j*L)*(j*L*z)^((a+L)/2-1)*besselK(2*(sqrt(j*L*z)), a-L)/(gamma(a)*gamma(L))
-}
-y1 <- K(x, 1, 2, 1)
-y3 <- K(x, 3, 2, 1)
-y8 <- K(x, 8, 2, 1)
-
-SimilarityDistances <- data.frame(x, y1, y3, y8)
-
-SimilarityDistances.melt <- melt(SimilarityDistances, 
-                                 measure.vars=2:4,
-                                 value.name = "Transformations",
-                                 variable.name = "Transformation"
-)
-
-ggplot(SimilarityDistances.melt, 
-       aes(x=x, y=Transformations,
-           color=Transformation,
-           group=Transformation
-       ))+
-  geom_line(size=3, alpha=.5)+
-  geom_line(col='black', size=.2)+
-  ylim(c(0, .5))+
-  theme_economist()
-```
-
-#G0 distribution
-
-```{r}
-x <- seq(.1, 10, length.out=500)
-
-G <- function(z, a, j, L)
-{
-  L^L*gamma(L-a)*z^(L-1)/(j^a*gamma(L)*gamma(-a)*(j+L*z)^(L-a))
-}
-y1 <- G(x, -1.5, 2, 1)
-y3 <- G(x, -3, 2, 1)
-y8 <- G(x, -8, 2, 1)
-
-SimilarityDistances <- data.frame(x, y1, y3, y8)
-
-SimilarityDistances.melt <- melt(SimilarityDistances, 
-                                 measure.vars=2:4,
-                                 value.name = "Transformations",
-                                 variable.name = "Transformation"
-)
-
-ggplot(SimilarityDistances.melt, 
-       aes(x=x, y=Transformations,
-           color=Transformation,
-           group=Transformation
-       ))+
-  geom_line(size=3, alpha=.5)+
-  geom_line(col='black', size=.2)+
-  ylim(c(0, .5))+
-  theme_economist()
-```
-
-#random number generators
-
-We are going to get the inverse func of K's Cumulative Distribution Functions, so that we can generate those random number.
+So, we are going to get the inverse func of K's Cumulative Distribution Functions.
 
 But it seem that we can't get the inverse func of K. So...
 
 ###test example
 ```{r}
 f1 <- function(x){1+0*x}
+#inverse func of f1 is f2
 f2 <- function(x){integrate(f1, 0, x)}
 
 
@@ -182,6 +179,8 @@ for(i in (1:n))
 }
 
 z <- data.frame(z = as.vector(y))
+ggplot(z, aes(x=z)) +
+  geom_density(col="green", size=2)
 
 ```
 
@@ -194,60 +193,165 @@ K <- function(z, a, j, L)
 }
 f1 <- function(x){K(x, 1, 2, 1)}
 f2 <- function(x){integrate(f1, 0, x)}
-
-
-n = 1000
-a <- runif(n, 0, 20)
-
-y <- (1:n)
-
-for(i in (1:n))
-{
-  x <- f2(a[i])$value
-  y[i]<-x
-}
-
-z <- data.frame(z = as.vector(y))
-
+#f3 = inverse(f2) 
 ```
 
-#Analysis bright
 
-###The following is the simple statistic characteristic of bright.Rdata.
-```{r bright.Rdata}
+# Exploratory Data Analysis
+-----------------------------------------------------------------
+
+The following is the simple statistic characteristic of bright.Rdata.
+
+```{r Quantitative_EDA_Urban}
 typeof(bright)
 dim(bright)
 range(bright)
 
-vector.bright <- data.frame(bright=as.vector(bright))
+vector.bright<- data.frame(bright=as.vector(bright))
 summary(vector.bright)
 ```
-###boxplot
+Move to graphical representations of the data.
 ```{r}
-vector.bright <- data.frame(as.vector(bright))
+ggplot(vector.bright, aes(x=bright)) +
+  geom_boxplot(notch = TRUE)
 
 ggplot(vector.bright, aes(x=bright)) +
-  geom_boxplot(notch = TRUE)+
+  geom_boxplot(notch = TRUE) +
+  geom_rug() +
   scale_x_log10()
-
 ```
-###density of bright
+
+Histograms
+-----------------------------------------------------------------
+Histograms of the data complement the information shown by the boxplots.
+We will use the Freedman-Diaconis rule for building the histograms.
+It consists of using bins of equal size: $\frac32 \text{IQR}(z) / n^{1/3}$.
+
+```{r Graphical_EDA_Urban_Histogram, fig.cap='Histograms', fig.subcap=c('Linear scale', 'Semilogarithmic scale'), out.width = "50%", fig.align = "center"}
+ggplot(vector.bright, aes(x=bright)) +
+  geom_histogram(aes(y=..density..),
+                 bins=nclass.FD(unlist(vector.bright)),
+                 col="black", fill="white")
+
+ggplot(vector.bright, aes(x=bright)) +
+  geom_histogram(aes(y=..density..),
+                 bins=nclass.FD(unlist(vector.bright)),
+                 col="black", fill="white") +
+  scale_x_log10()
+```
+
+"mixing" the second boxplot with the second histogram
+
+```{r Graphical_EDA_BoxplotAndHistogram}
+ggplot(vector.bright, aes(x=bright)) +
+  geom_histogram(aes(y=..density..),
+                 bins=nclass.FD(unlist(vector.bright)),
+                 col="black", fill="white") +
+  geom_boxplot(aes(y=0.8), width=.1, notch=TRUE) +
+  ylab("Density and Boxplot") +
+  xlab("Intensity in semilogarithmic scale") +
+  scale_x_log10()
+# Try reducing the number of bins
+```
+
+* The data are positive
+* The data have a very large dynamic range
+* The data are strongly asymmetric
+
+It's time to look ad the data in their "natural" domain: as an image.
+The "imagematrix" library requires that the data be in $[0,1]$.
+It provides a function to accomplish this mapping.
 
 ```{r}
-x <- bright
+plot(imagematrix(normalize(bright)))
+```
 
-x <- data.frame(x = as.vector(x))
-ggplot(x, aes(x=x)) +
-  geom_density(col="green", size=2)+
+We hardly see anything.
+There are a few very large values that "flatten" most of the observations into very dark shades of gray.
+We would like to "use" equally all possible values.
+In other words, we would like to have a uniform histogram.
+
+We need some theory to solve this challenge.
+
+Consider the continuous random variable $Z\colon \Omega\to\mathbb R$ with cumulative distribution function $F_Z$.
+The random variable $W=F_Z(Z)$ has uniform distribution.
+
+Proof: The cumulative distribution function of $W$ is $F_W(w)=\Pr(W\leq w)=\Pr(F_Z(Z)\leq w)$.
+Since $Z$ is continuous, there exists the inverse of its cumulative distribution function, $F^{-1}_Z$.
+We can then write 
+$F_W(w)=\Pr(F_Z(Z)\leq w) = \Pr(F^{-1}_Z(F_Z(Z)) \leq F_Z^{-1}(w)) = \Pr(Z\leq F^{-1}_Z(w))$, 
+which is exactly the cumulative distribution function of $Z$ at $F^{-1}_Z(w)$, so $F_W(w)=F_Z(F^{-1}_Z(w))=w$, which characterizes a uniform random variable on $(0,1)$.
+
+So we only need to apply the cumulative distribution function of the random variable that produced the data to the data themselves and we will obtain samples from the Uniform distribution.
+But do we have this function?
+Usually we don't, but we can estimate it.
+
+One of the simplest manners to estimate a cumulative distribution function from data $z=(z_1,\dots,z_n)$ is with the empirical cumulative distribution function, or just "empirical function."
+It is just the finite approximation of the definition of a cumulative distribution function, and is given by
+\begin{equation}
+\widehat{F}(t) = \frac1n \#\{j \text{ such that } z_j\leq t\} ,
+\end{equation}
+where $\#$ denotes the number of elements in the set.
+
+Let us see the original data and its empirical function.
+
+```{r OriginalDataEmpiricalFunction}
+ggplot(vector.bright, aes(x=bright)) +
+  geom_histogram(aes(y=..density..),
+                 bins=nclass.FD(unlist(vector.bright))/50,
+                 col="black", fill="white") +
+  stat_ecdf(col="red") +
+  ylab("Density and Empirical function") +
+  xlab("Intensity in semilogarithmic scale") +
   scale_x_log10()
+```
+
+Let us implement this idea.
+
+```{r HistogramEqualization}
+# First, we compute the empirical function
+ecdf.bright <- ecdf(unlist(vector.bright))
+
+# Then, we apply this function to the data
+eq.bright <- ecdf.bright(unlist(vector.bright))
+
+# Finally, we restore the matrix organization of the data
+dim(eq.bright) <- dim(bright)
+
+# And we see the result
+plot(imagematrix(eq.bright))
+```
+
+
+Let us now perform an EDA on the equalized data.
+
+```{r EDA_EqualizedData}
+summary(as.vector(eq.bright))
+
+vector.eq.bright <- data.frame(eq.bright=as.vector(eq.bright))
+                              
+ggplot(vector.eq.bright, aes(x=eq.bright)) +
+  geom_histogram(aes(y=..density..),
+                 bins=nclass.FD(unlist(vector.eq.bright)),
+                 col="black", fill="white") +
+  geom_boxplot(aes(y=1.2), width=.1, notch=TRUE) +
+  ylab("Density and Boxplot") +
+  xlab("Equalized data") 
 
 ```
-###try to make sence
 
-```{r}
+Histogram equalization is one of the most important (and basic) operations in image processing.
+Once we have understood how it works, we may use the function already implemented in the imagematrix library.
+
+But\dots\ do we need something "so complicated"?
+Cannot we use a simple transformation as, for instance, the logarithm?
+Of course we can!
+
+```{r LogarithmImageTransformation}
 plot(imagematrix(normalize(log(bright))))
 ```
 
+change normalize
 ```{r LogarithmImageTransformation}
 
 clipping <- function(img, low=0, high=1) {
@@ -274,28 +378,81 @@ normalize3 <- function(img) {
 plot(imagematrix(normalize3(log(bright))))
 ```
 
+## The effect of the bin size on the histogram
+
+The bin size may have big impact on the histogram and, thus, affect the reader's understanding of the data.
+We will see examples of this effect with a sample of size $n=300$.
+
+```{r BinSizeEffect, fig.cap='Histograms', fig.subcap=c('Default bin size', 'Freedmand-Diaconis bin size', "Improved histogram"), out.width = "50%", fig.align = "center"}
+x <- data.frame(x = as.vector(log(bright)))
+
+ggplot(x, aes(x=x)) +
+  geom_histogram(aes(y=..density..),
+                 col="black", fill="white") +
+  ylab("Proportions histogram")
+
+ggplot(x, aes(x=x)) +
+  geom_histogram(aes(y=..density..),
+                 bins=nclass.FD(unlist(x)),
+                 col="black", fill="white") +
+  ylab("Proportions histogram")
+
+ggplot(x, aes(x=x)) +
+  geom_density(col="blue", size=2) +
+  geom_histogram(aes(y=..density..),
+                 bins=nclass.FD(unlist(x)), 
+                 alpha=0.5, fill="#33AADE", color="black") +
+  ylab("Histogram and smoothed histogram")
+
+```
+
+
+## Multivariate data
+
+It is an image with three bands.
+Let's look at it as it is, and after equalization (independent by band).
 
 ```{r}
-normalize3 <- function(img) {
-  a <- quantile(img, 0.90)
-  clipping(img - a)
-}
+plot(imagematrix(equalize_indep(bright)))
+```
 
-plot(imagematrix(normalize3(log(bright))))
+Now we transform the image data into a data.frame.
+
+```{r ImageIntodataframe}
+
+bright.df <- data.frame(ch1=as.vector(bright[,,1]),
+                      ch2=as.vector(bright[,,2]),
+                      ch3=as.vector(bright[,,3]))
+```
+
+Pairs plot: gives an idea of the relationships between pairs of variables.
+
+```{r PairsPlot}
+ggpairs(bright.df)
+```
+
+Let us pay more attention to each pair.
+
+```{r PairWithMarginal}
+ggMarginal(
+  ggplot(bright.df, aes(x=ch1, y=ch2)) +
+    geom_point()
+)
+```
+
+We improve the plot.
+
+```{r PairWithMarginalImproved}
+ggMarginal(
+  ggplot(bright.df, aes(x=ch1, y=ch2)) +
+    geom_point(size=.05) +
+    scale_x_log10() +
+    scale_y_log10(), 
+  type = "densigram"
+)
+
 ```
 
 
 
-References
-Burchell, J. & Vargas, M. (2017), The Hitchhiker’s Guide to ggplot2,
-Leanpub.
-URL: https://leanpub.com/hitchhikers_ggplot2
-Tufte, E. R. (2001), The Visual Display of Quantitative Information,
-2 edn, Graphics Press.
-Wickham, H. (2009), ggplot2: Elegant Graphics for Data Analysis,
-Springer.
-Xie, Y., Allaire, J. & Grolemund, G. (2018), R Markdown: The
-Definitive Guide, Taylor Francis Ltd.
-URL: https://www.ebook.de/de/product/33698871/yihui_
-rstudio_inc_boston_ma_usa_xie_j_j_allaire_garrett_
-grolemund_r_markdown.html
+
