@@ -1,6 +1,4 @@
-*.aux
-*.log
-*.gz
-*.pdf
-.gitignore
+*
+
+!*.tex
 
