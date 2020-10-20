@@ -1,0 +1,5 @@
+the following should write in .gitignore
+# Ignore everything in this directory 
+* 
+# Except this file 
+!.gitkeep 
