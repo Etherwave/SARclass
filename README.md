@@ -2,6 +2,6 @@
 
 a good start
 
-report 1 finished
+report 1，2 finished
 
-let's start report2.Rmd
+let's start report3.Rmd

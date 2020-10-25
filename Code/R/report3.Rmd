@@ -1,7 +1,7 @@
 ---
 title: "Report2 - SAR Course Xidian University"
 author: 'Lishaogang Ruanhengyu Aimee Wangyuan '
-date: "2020/10/25"
+date: "2020/10/18"
 header-includes: \usepackage{bm,bbm}
 ---
 
@@ -51,6 +51,9 @@ $$
 $$
 \Gamma(1)=\int_0^{Inf} t^{(1-1)}exp(-t)dt=1
 $$
+$$
+\Gamma(n+1)=n!
+$$
 
 which equal to:
 
@@ -82,6 +85,16 @@ $$
 
 ```{r load bright.data}
 load("bright.Rdata")
+```
+
+the $$\mu$$ should be:
+
+```{r}
+bright.v = as.vector(bright)
+bright.df = data.frame(as.vector(bright))
+
+u = mean(bright.v)
+print(u)
 ```
 
 The density for (SAR) gamma in this bright.Data case
@@ -135,8 +148,68 @@ when L=1:
 $$
 f_z(z;\alpha,\gamma,1)=\frac{\Gamma(1-\alpha)}{\gamma^\alpha\Gamma(-\alpha)}\frac{z}{(\gamma+z)^{1-\alpha}}
 $$
+$$
+E(z^k)=(\frac{\gamma}{L})^k\frac{\Gamma(-\alpha-k)}{\Gamma(-\alpha)}\frac{\Gamma(L+k)}{\Gamma(L)}
+$$
 
+when L=1, k=1:
+
+$$
+E(z)=\gamma\frac{\Gamma(-\alpha-1)}{\Gamma(-\alpha)}
+$$
+
+$$
+D(X)=E[(X-E(X))^2]=E(X^2)-[E(X)]^2
+$$
+
+when L=1, k=2
+
+$$
+D(z)=E[(z-E(z))^2]=E(z^2)-[E(z)]^2
+$$
+$$
+E(z^2)=2\gamma^2\frac{\Gamma(-\alpha-2)}{\Gamma(-\alpha)}
+$$
+so:
+
+$$
+D(z)=2\gamma^2\frac{\Gamma(-\alpha-2)}{\Gamma(-\alpha)}-(\gamma\frac{\Gamma(-\alpha-1)}{\Gamma(-\alpha)})^2
+$$
+
+now we get E(z) and D(z):
+
+$$
+E(z)=\gamma\frac{\Gamma(-\alpha-1)}{\Gamma(-\alpha)}
+$$
+$$
+D(z)=2\gamma^2\frac{\Gamma(-\alpha-2)}{\Gamma(-\alpha)}-(\gamma\frac{\Gamma(-\alpha-1)}{\Gamma(-\alpha)})^2
+$$
+so we will get:
+
+let \mu=E(z), var=D(z)
+
+$$
+\alpha=\frac{2\mu}{2\mu-var-\mu^2}-2
+$$
+$$
+\gamma=-\mu\frac{var+\mu^2}{2\mu-var-\mu^2}
+$$
+the \lapha, \gamma in 𝒢_I^0 should be:
 
 ```{r}
+bright.v = as.vector(bright)
+bright.df = data.frame(as.vector(bright))
+
+bright.u = mean(bright.v)
+bright.var = var(bright.v)
+
+alpha = 2*bright.u/(2*bright.u-bright.var-(bright.u)^2)-2
+
+pgamma = -bright.u*((bright.var+(bright.u)^2)/(2*bright.u-bright.var-(bright.u)^2))
+
+print(alpha)
+print(pgamma)
 
 ```
+
+
