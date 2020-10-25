@@ -84,7 +84,7 @@ $$
 $$
 
 ```{r load bright.data}
-load("bright.Rdata")
+load("../../Data/bright.Rdata")
 ```
 
 the $$\mu$$ should be:
