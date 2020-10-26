@@ -84,7 +84,7 @@ $$
 $$
 
 ```{r load bright.data}
-load("../../Data/bright.Rdata")
+load("bright.Rdata")
 ```
 
 the $$\mu$$ should be:
@@ -189,10 +189,10 @@ so we will get:
 let \mu=E(z), var=D(z)
 
 $$
-\alpha=\frac{2\mu}{2\mu-var-\mu^2}-2
+\hat\alpha=\frac{2var}{\mu^2var}
 $$
 $$
-\gamma=-\mu\frac{var+\mu^2}{2\mu-var-\mu^2}
+\hat\gamma=\frac{\mu var+\mu^3}{var-\mu^2}
 $$
 the \lapha, \gamma in 𝒢_I^0 should be:
 
@@ -203,9 +203,9 @@ bright.df = data.frame(as.vector(bright))
 bright.u = mean(bright.v)
 bright.var = var(bright.v)
 
-alpha = 2*bright.u/(2*bright.u-bright.var-(bright.u)^2)-2
+alpha = 2*bright.var/(bright.u^2*bright.var)
 
-pgamma = -bright.u*((bright.var+(bright.u)^2)/(2*bright.u-bright.var-(bright.u)^2))
+pgamma = (bright.u*bright.var+bright.u^3)/(bright.var-bright.u^2)
 
 print(alpha)
 print(pgamma)
