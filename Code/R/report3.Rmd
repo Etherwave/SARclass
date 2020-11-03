@@ -54,6 +54,9 @@ $$
 $$
 \Gamma(n+1)=n!
 $$
+$$
+\Gamma(n+1)=n\Gamma(n)
+$$
 
 which equal to:
 
@@ -84,7 +87,7 @@ $$
 $$
 
 ```{r load bright.data}
-load("bright.Rdata")
+load("../../Data/bright.Rdata")
 ```
 
 the $$\mu$$ should be:
@@ -112,12 +115,9 @@ y = f(x)
 y.df = data.frame(as.vector(y))
 xy.df<-data.frame(x=x,y)
 
-ggplot(data= NULL, aes(x = x, y = y)) +
-  geom_point(color = "darkred")+
-  scale_x_log10()
-
 ggplot(xy.df,aes(x=x,y))+
-  geom_line(colour="green")+
+  geom_line(colour="green", size=2)+
+  scale_x_log10()+
   ggtitle("bright gamma distribution")
 
 ggplot(bright.df, aes(x=bright)) +
@@ -134,9 +134,6 @@ ggplot(x, aes(x=x)) +
                  col="black", fill="white") +
   ylab("Proportions histogram")
 ```
-$$
-f(x) = \frac{1}{(\sqrt{(2\pi)} \sigma)} e^-{(\frac{(x - \mu)^2}{(2\sigma^2)}}) 
-$$
 
 The $$𝒢_I^0$$ distribution is:
 
@@ -149,6 +146,9 @@ $$
 f_z(z;\alpha,\gamma,1)=\frac{\Gamma(1-\alpha)}{\gamma^\alpha\Gamma(-\alpha)}\frac{z}{(\gamma+z)^{1-\alpha}}
 $$
 $$
+f_z(z;\alpha,\gamma,1)=\frac{-\alpha}{\gamma^\alpha}\frac{z}{(\gamma+z)^{1-\alpha}}
+$$
+$$
 E(z^k)=(\frac{\gamma}{L})^k\frac{\Gamma(-\alpha-k)}{\Gamma(-\alpha)}\frac{\Gamma(L+k)}{\Gamma(L)}
 $$
 
@@ -157,42 +157,70 @@ when L=1, k=1:
 $$
 E(z)=\gamma\frac{\Gamma(-\alpha-1)}{\Gamma(-\alpha)}
 $$
-
 $$
-D(X)=E[(X-E(X))^2]=E(X^2)-[E(X)]^2
+E(z)=\frac{\gamma}{-\alpha-1}
 $$
-
 when L=1, k=2
+$$
+E(z^2)=2\gamma^2\frac{\Gamma(-\alpha-2)}{\Gamma(-\alpha)}
+$$
+$$
+E(z^2)=\frac{2\gamma^2}{(-\alpha-1)(-\alpha-2)}
+$$
 
 $$
 D(z)=E[(z-E(z))^2]=E(z^2)-[E(z)]^2
 $$
-$$
-E(z^2)=2\gamma^2\frac{\Gamma(-\alpha-2)}{\Gamma(-\alpha)}
-$$
-so:
 
 $$
-D(z)=2\gamma^2\frac{\Gamma(-\alpha-2)}{\Gamma(-\alpha)}-(\gamma\frac{\Gamma(-\alpha-1)}{\Gamma(-\alpha)})^2
+D(z)=\frac{-\alpha\gamma^2}{(-\alpha-1)^2(-\alpha-2)}
 $$
 
-now we get E(z) and D(z):
+we can solve $\alhpa$ and $\gamma$ by E(z) and E(z^2), or by E(z) and D(z).
+
+The first solution(E(z) and E(z^2)):
+
+let m1 = E(z), m2 = E(z^2)
+
+we will get:
 
 $$
-E(z)=\gamma\frac{\Gamma(-\alpha-1)}{\Gamma(-\alpha)}
+\hat\alpha=-2-\frac{2}{m2/m1^2}
 $$
 $$
-D(z)=2\gamma^2\frac{\Gamma(-\alpha-2)}{\Gamma(-\alpha)}-(\gamma\frac{\Gamma(-\alpha-1)}{\Gamma(-\alpha)})^2
+\hat\gamma=m1(2+\frac{2}{2m2/m1^2})
 $$
-so we will get:
 
-let \mu=E(z), var=D(z)
+the \lapha, \gamma in 𝒢_I^0 should be:
+
+```{r}
+bright.v = as.vector(bright)
+bright.df = data.frame(as.vector(bright))
+
+m1 = mean(bright.v)
+m2 = mean(bright.v^2)
+m212 = m2/m1^2
+
+alpha = -2-2/(m212)
+
+pgamma = m1*(2+2/(m212))
+
+print(alpha)
+print(pgamma)
+
+```
+
+The second solution(E(z), D(z)):
+
+let m1=E(z), m2=D(z), m212 = m2/m1^2
+
+we will get:
 
 $$
-\hat\alpha=\frac{2var}{\mu^2var}
+\hat\alpha=\frac{2m_{212}}{1-m_{212}}
 $$
 $$
-\hat\gamma=\frac{\mu var+\mu^3}{var-\mu^2}
+\hat\gamma=-m_1\frac{1+m_{212}}{1-m_{212}}
 $$
 the \lapha, \gamma in 𝒢_I^0 should be:
 
@@ -200,15 +228,44 @@ the \lapha, \gamma in 𝒢_I^0 should be:
 bright.v = as.vector(bright)
 bright.df = data.frame(as.vector(bright))
 
-bright.u = mean(bright.v)
-bright.var = var(bright.v)
+m1 = mean(bright.v)
+m2 = var(bright.v)
+m212 = m2/m1^2
 
-alpha = 2*bright.var/(bright.u^2*bright.var)
+alpha = 2*m212/(1-m212)
 
-pgamma = (bright.u*bright.var+bright.u^3)/(bright.var-bright.u^2)
+pgamma = -m1*(1+m212)/(1-m212)
 
 print(alpha)
 print(pgamma)
+
+```
+
+```{r}
+bright.v = as.vector(bright)
+bright.df = data.frame(as.vector(bright))
+
+m1 = mean(bright.v)
+m2 = var(bright.v)
+m212 = m2/m1^2
+
+alpha = 2*m212/(1-m212)
+
+pgamma = -m1*(1+m212)/(1-m212)
+
+f_z <- function(z){(-alpha)/(pgamma^alpha)*(z)/(pgamma+alpha)^(1-alpha)}
+
+x <- seq(.1, 1e+8, length.out=50000)
+
+y <- f_z(x)
+
+ggplot(data= NULL, aes(x = x, y = y)) +
+  geom_line(color = "darkred")+
+  scale_x_log10()
+
+ggplot(bright.df, aes(x=bright)) +
+  geom_density(col="blue", size=2)+
+  scale_x_log10()
 
 ```
 
