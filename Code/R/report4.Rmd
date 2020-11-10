@@ -1,0 +1,277 @@
+---
+output:
+html_document: default
+pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(reshape2)
+require(ggplot2)
+require(ggthemes)
+require(maxLik)
+theme_set(theme_minimal())
+require(GGally)
+require(ggExtra)
+library(readr)
+source("imagematrix.R")
+```
+
+```{r load bright.data}
+load("../../Data/bright.Rdata")
+```
+
+Assignment 4
+The assignment consists in producing a report (text, code, plots, and images) about the two following topics.
+
+1. Consider the Rayleigh distribution characterized by the probability density function
+$$
+f_x(x;\delta^2)=\frac{x}{\delta^2}exp{(-x^2/(2\delta^2))}1_{R_+(x)}
+$$
+where σ > 0. This is a model for amplitude SAR data.
+
+1.1 Knowing that $E X = σ \sqrt{π/2}$ and that $Var X = σ^2(4 − π)/2$, obtain two estimators for σ2 based on analogy: one of them $\hat σ^2_1$ based on the first sample moment.
+
+1.2 Obtain $\hat σ^2_{ML}$ the maximum likelihood estimator of σ2.
+
+1.3 Compare the performance of $\hat σ^2_1$, $\hat σ^2_{ML}$, and $\hat σ^2$ the improved version of $\hat σ^2_1$ by bootstrap.
+
+2. Define a phantom (different from the ones we saw), define a data model for this phantom, produce one observation, and analyze the effect of the mean and median filters on this image.
+
+作业4作业包括生成有关以下两个主题的报告（文本，代码，图解和图像）。
+
+ 1.考虑以概率密度函数为特征的瑞利分布其中σ>0。
+
+$$
+f_x(x;\delta^2)=\frac{x}{\delta^2}exp{(-x^2/(2\delta^2))}1_{R_+(x)}
+$$
+
+这是幅度SAR数据的模型。
+
+1.1知道$ EX =σ\sqrt {π/ 2} $并且$ Var X =σ^ 2（4 −π）/ 2 $，
+
+根据类推获得σ2的两个估计量：其中一个$ \hat σ^ 2_1 $基于第一个采样时刻。
+
+1.2获得$ \hat σ^ 2_ {ML} $σ2的最大似然估计。
+
+1.3比较bootstrap的$ \hat σ^ 2_1 $，和不使用bootstrap的$ \hat σ^ 2_ {ML} $和$ \hat σ^ 2 $的性能。
+
+2.定义一个模型（不同于我们看到的模型），为该模型定义一个数据模型，产生一个观察结果，并分析均值和中值滤波器对该图像的影响。
+
+we can know that:
+
+the moment estimation of σ is:
+$$
+\hat σ^2_1=\frac{E(x)^2}{\pi/2}
+$$
+the maximum likelihood of σ is:
+$$
+\hat σ^ 2_ {ML}=\frac{\sum_{i=1}^{n} x_i^2}{2n}
+$$
+
+
+```{r Moments estimators}
+bright.v = as.vector(bright)
+bright.df = data.frame(as.vector(bright))
+pi = 3.1415926
+m = mean(bright.v)
+delta2 = m^2/(pi/2)
+delta = sqrt(delta2)
+print(paste("delta", delta))
+f <- function(x, delta){x/(delta^2)*exp(0)^(-(x^2)/(2*(delta^2)))}
+x <- seq(0, 5000000, length.out=5000)
+y = f(x, delta)
+
+y.df = data.frame(as.vector(y))
+xy.df<-data.frame(x=x,y)
+
+ggplot(xy.df,aes(x=x,y))+
+  geom_line(colour="green", size=2)+
+  scale_x_log10()
+```
+```{r Maximum likelihood estimators}
+bright.v = as.vector(bright)
+bright.df = data.frame(as.vector(bright))
+pi = 3.1415926
+m2 = mean(bright.v^2)
+delta2 = m/2
+delta = sqrt(delta2)
+print(paste("delta", delta))
+f <- function(x, delta){x/(delta^2)*exp(0)^(-(x^2)/(2*(delta^2)))}
+x <- seq(0, 5000000, length.out=5000)
+y = f(x, delta)
+
+y.df = data.frame(as.vector(y))
+xy.df<-data.frame(x=x,y)
+
+ggplot(xy.df,aes(x=x,y))+
+  geom_line(colour="green", size=2)+
+  scale_x_log10()
+```
+
+
+
+
+
+```{r Moments estimators improved by bootstrap}
+bright.v = as.vector(bright)
+bright.df = data.frame(as.vector(bright))
+
+Estimator.delta <- function(z) {
+  m = mean(z)
+  delta2 = m^2/(pi/2)
+  delta = sqrt(delta2)
+  return(list("delta"=delta))
+}
+
+### Bootstrap improved ML for the GI0 model
+n = 300
+delta.bootstrap <- array((1:n))
+n <- 5661
+for(r in 1:n) {
+  z <- sample(bright, n, replace=TRUE) 
+  estim.bright.delta <- Estimator.delta(z)
+  delta.bootstrap[r] = estim.bright.delta
+}
+delta.bootstrap.matrix = matrix(as.matrix(unlist(delta.bootstrap)))
+
+delta.bootstrap.improved <- mean(delta.bootstrap.matrix)
+print(paste("delta.bootstrap.improved", delta.bootstrap.improved))
+
+f <- function(x, delta){x/(delta^2)*exp(0)^(-(x^2)/(2*(delta^2)))}
+x <- seq(0, 5000000, length.out=5000)
+y = f(x, delta.bootstrap.improved)
+
+y.df = data.frame(as.vector(y))
+xy.df<-data.frame(x=x,y)
+
+ggplot(xy.df,aes(x=x,y))+
+  geom_line(colour="green", size=2)+
+  scale_x_log10()
+
+```
+
+The data of my phantom is produced by python.
+
+Althogh there is a good performance in python for middle value local filter and mean local filter, I still translate the phantom to the type of txt, and rebuild these tow filters by R.
+
+The picture produced by python is in the folder of Data, you may see it if you are interested.
+
+```{r my phantom}
+
+data<-read_delim("../../Data/lishoagang_phantom_t.txt", delim = " ", col_names=FALSE)
+data = unlist(data)
+data.a= array(data, dim=c(200, 200, 1))
+data.n = normalize(data.a)
+image = imagematrix(data.n)
+plot(image)
+```
+
+
+```{r}
+mean1 = 0
+mean2 = 255
+delta1 = 200
+delta2 = 200
+
+rows = 200
+cols = 200
+
+data<-read_delim("../../Data/lishoagang_phantom_t.txt", delim = " ", col_names=FALSE)
+data = unlist(data)
+
+for(i in 0:(rows-1))
+{
+  for(j in 1:cols)
+  {
+    if(data[i*cols+j]==0)
+    {
+      data[i*cols+j]=rnorm(1, mean=mean1, sd=delta1)
+    }
+    else
+    {
+      data[i*cols+j]=rnorm(1, mean=mean2, sd=delta2)
+    }
+  }
+}
+data.a = array(data, dim=c(rows, cols, 1))
+data.n = normalize(data.a)
+image = imagematrix(data.n)
+plot(image)
+```
+
+mean local filter
+```{r}
+SkeletonMean <- function(y, s) {
+  
+  # Input: the image and the side of the squared support
+  
+  # Output: filtered image z
+  
+  # Input image dimensions
+  m <- dim(y)[1]
+  n <- dim(y)[2]
+  
+  # Make space for the output image
+  z <- y
+  
+  # Main loop
+  margin <- (s+1)/2
+  marginm1 <- margin-1
+  
+  for(k in margin:(m-margin)) {
+    for(ele in margin:(n-margin)) {
+      sum1 = y[((k-marginm1):(k+marginm1)),((ele-marginm1):(ele+marginm1))]
+      z[k,ele] = mean(matrix(as.matrix(sum1), nrow=1))
+    }
+  }
+  return(z)
+}
+
+mean_image = data.n
+mean_image.df = data.frame(mean_image)
+
+mean_filter_image = SkeletonMean(mean_image.df, 3)
+mean_filter_image = matrix(as.matrix(mean_filter_image), nrow=200)
+image = imagematrix(normalize(mean_filter_image))
+plot(image)
+```
+
+middle local filter
+```{r}
+SkeletonMedian <- function(y, s) {
+  
+  # Input: the image and the side of the squared support
+  
+  # Output: filtered image z
+  
+  # Input image dimensions
+  m <- dim(y)[1]
+  n <- dim(y)[2]
+  
+  # Make space for the output image
+  z <- y
+  
+  # Main loop
+  margin <- (s+1)/2
+  marginm1 <- margin-1
+  for(k in margin:(m-margin)) {
+    for(ele in margin:(n-margin)) {
+      
+      values <- y[(k-marginm1):(k+marginm1),(ele-marginm1):(ele+marginm1)]
+      
+      z[k,ele] = median(values)
+    }
+  }
+  
+  return(z)
+}
+middle_image = data.n
+middle_image.df = data.frame(middle_image)
+
+middle_filter_image = SkeletonMean(middle_image.df, 5)
+middle_filter_image = matrix(as.matrix(middle_filter_image), nrow=200)
+image = imagematrix(normalize(middle_filter_image))
+plot(image)
+```
+
