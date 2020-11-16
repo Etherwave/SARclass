@@ -1,0 +1,272 @@
+---
+title: "Report2 - SAR Course Xidian University"
+author: 'Lishaogang Ruanhengyu Aimee Wangyuan '
+date: "2020/10/18"
+header-includes: \usepackage{bm,bbm}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(reshape2)
+require(ggplot2)
+require(ggthemes)
+theme_set(theme_minimal())
+require(GGally)
+require(ggExtra)
+```
+
+Assignment III
+This assignment consists in a single task: load the bright.Rdata
+data and, assuming that the number of looks is L0 = 1:
+1. Fit the SAR Gamma model Γ (μ, L0) (notice that you have to estimate only μ);
+2. Fit the $$𝒢_I^0(α, γ, L0)$$ model (you have to estimate α, γ). Show two results in this part:
+• Moments estimators, and
+• Maximum Likelihood estimators 
+
+“Fitting a model”, in this assignment, means:
+• reporting the estimates (one for the Γ (μ, L0) model), and two pairs for the $$𝒢_I^0(α, γ, L0)$$ model),
+• showing a histogram of the data along with the three estimated densities.
+
+the density of Gamma is:
+
+$$
+\int_0^{Inf} t^{(x-1)}exp(-t)dt
+$$
+
+The (SAR) Gamma distribution is
+
+$$Z \~{} \Gamma(\mu, L)$$
+density:
+
+$$
+f_\Gamma(z; L, \mu)=\frac{L^L}{\mu^L\Gamma(L)}z^{L-1}exp{(\frac{-Lz}{\mu})}
+$$
+if L = 1
+
+the density will be:
+
+$$
+f_\Gamma(z; 1, \mu)=\frac{1^1}{\mu^1\Gamma(1)}z^{1-1}exp{(\frac{-1z}{\mu})}
+$$
+$$
+\Gamma(1)=\int_0^{Inf} t^{(1-1)}exp(-t)dt=1
+$$
+$$
+\Gamma(n+1)=n!
+$$
+$$
+\Gamma(n+1)=n\Gamma(n)
+$$
+
+which equal to:
+
+$$
+f_\Gamma(z; 1, \mu)=\frac{1}{\mu}exp{(\frac{-z}{\mu})}
+$$
+
+moment estimation for gamma:
+
+$$
+E(z)=\int_0^{Inf}zf_\Gamma(z;1,\mu)dz=\int_0^{Inf}\frac{z}{\mu}exp(\frac{-z}{\mu})dz=\mu
+$$
+maximum likelihood estimation:
+
+$$
+L=\prod_{i=1}^n(\frac{1}{\mu}e^{(\frac{-z_i}{\mu})})
+$$
+
+$$
+lnL=-nln{\mu}+\frac{\sum_{i=1}^{n}-z_i}{\mu}
+$$
+
+$$
+\frac{\mathrm{d}lnL}{\mathrm{d}\mu}=-\frac{n}{\mu}+\frac{\sum_{i=1}^{n}z_i}{\mu^2}=0
+$$
+$$
+\hat\mu=\frac{\sum_{i=1}^nz_i}{n}
+$$
+
+```{r load bright.data}
+load("../../Data/bright.Rdata")
+```
+
+the $$\mu$$ should be:
+
+```{r}
+bright.v = as.vector(bright)
+bright.df = data.frame(as.vector(bright))
+
+u = mean(bright.v)
+print(u)
+```
+
+The density for (SAR) gamma in this bright.Data case
+
+```{r Moments estimators}
+bright.v = as.vector(bright)
+bright.df = data.frame(as.vector(bright))
+
+u = mean(bright.v)
+
+f <- function(x){1/u*exp(1)^(-x/u)}
+x <- seq(0, 5000000, length.out=5000)
+y = f(x)
+
+y.df = data.frame(as.vector(y))
+xy.df<-data.frame(x=x,y)
+
+ggplot(xy.df,aes(x=x,y))+
+  geom_line(colour="green", size=2)+
+  scale_x_log10()+
+  ggtitle("bright gamma distribution")
+
+ggplot(bright.df, aes(x=bright)) +
+  geom_density(col="blue", size=2)+
+  scale_x_log10()
+```
+histogram:
+
+```{r}
+x <- data.frame(x = as.vector(log(bright)))
+
+ggplot(x, aes(x=x)) +
+  geom_histogram(aes(y=..density..),
+                 col="black", fill="white") +
+  ylab("Proportions histogram")
+```
+
+The $$𝒢_I^0$$ distribution is:
+
+$$
+f_z(z;\alpha,\gamma,L)=\frac{L^L\Gamma(L-\alpha)}{\gamma^\alpha\Gamma(L)\Gamma(-\alpha)}\frac{z^L}{(\gamma+Lz)^{L-\alpha}}
+$$
+when L=1:
+
+$$
+f_z(z;\alpha,\gamma,1)=\frac{\Gamma(1-\alpha)}{\gamma^\alpha\Gamma(-\alpha)}\frac{z}{(\gamma+z)^{1-\alpha}}
+$$
+$$
+f_z(z;\alpha,\gamma,1)=\frac{-\alpha}{\gamma^\alpha}\frac{z}{(\gamma+z)^{1-\alpha}}
+$$
+$$
+E(z^k)=(\frac{\gamma}{L})^k\frac{\Gamma(-\alpha-k)}{\Gamma(-\alpha)}\frac{\Gamma(L+k)}{\Gamma(L)}
+$$
+
+when L=1, k=1:
+
+$$
+E(z)=\gamma\frac{\Gamma(-\alpha-1)}{\Gamma(-\alpha)}
+$$
+$$
+E(z)=\frac{\gamma}{-\alpha-1}
+$$
+when L=1, k=2
+$$
+E(z^2)=2\gamma^2\frac{\Gamma(-\alpha-2)}{\Gamma(-\alpha)}
+$$
+$$
+E(z^2)=\frac{2\gamma^2}{(-\alpha-1)(-\alpha-2)}
+$$
+
+$$
+D(z)=E[(z-E(z))^2]=E(z^2)-[E(z)]^2
+$$
+
+$$
+D(z)=\frac{-\alpha\gamma^2}{(-\alpha-1)^2(-\alpha-2)}
+$$
+
+we can solve $\alhpa$ and $\gamma$ by E(z) and E(z^2), or by E(z) and D(z).
+
+The first solution(E(z) and E(z^2)):
+
+let m1 = E(z), m2 = E(z^2)
+
+we will get:
+
+$$
+\hat\alpha=-2-\frac{2}{m2/m1^2}
+$$
+$$
+\hat\gamma=m1(2+\frac{2}{2m2/m1^2})
+$$
+
+the \lapha, \gamma in 𝒢_I^0 should be:
+
+```{r}
+bright.v = as.vector(bright)
+bright.df = data.frame(as.vector(bright))
+
+m1 = mean(bright.v)
+m2 = mean(bright.v^2)
+m212 = m2/m1^2
+
+alpha = -2-2/(m212)
+
+pgamma = m1*(2+2/(m212))
+
+print(alpha)
+print(pgamma)
+
+```
+
+The second solution(E(z), D(z)):
+
+let m1=E(z), m2=D(z), m212 = m2/m1^2
+
+we will get:
+
+$$
+\hat\alpha=\frac{2m_{212}}{1-m_{212}}
+$$
+$$
+\hat\gamma=-m_1\frac{1+m_{212}}{1-m_{212}}
+$$
+the \lapha, \gamma in 𝒢_I^0 should be:
+
+```{r}
+bright.v = as.vector(bright)
+bright.df = data.frame(as.vector(bright))
+
+m1 = mean(bright.v)
+m2 = var(bright.v)
+m212 = m2/m1^2
+
+alpha = 2*m212/(1-m212)
+
+pgamma = -m1*(1+m212)/(1-m212)
+
+print(alpha)
+print(pgamma)
+
+```
+
+```{r}
+bright.v = as.vector(bright)
+bright.df = data.frame(as.vector(bright))
+
+m1 = mean(bright.v)
+m2 = var(bright.v)
+m212 = m2/m1^2
+
+alpha = 2*m212/(1-m212)
+
+pgamma = -m1*(1+m212)/(1-m212)
+
+f_z <- function(z){(-alpha)/(pgamma^alpha)*(z)/(pgamma+alpha)^(1-alpha)}
+
+x <- seq(.1, 1e+8, length.out=50000)
+
+y <- f_z(x)
+
+ggplot(data= NULL, aes(x = x, y = y)) +
+  geom_line(color = "darkred")+
+  scale_x_log10()
+
+ggplot(bright.df, aes(x=bright)) +
+  geom_density(col="blue", size=2)+
+  scale_x_log10()
+
+```
+
+
